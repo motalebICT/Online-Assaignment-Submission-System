@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Teacher page</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+
+        }
+
+        .bg {
+            /* The image used */
+            background-image: url("css/images/website-wallpapers.jpg");
+
+            /* Full height */
+            height: 100%;
+            width: auto;
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body><div class="bg">
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid" style="margin-top: 10px">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Online Submission Service(OSS)</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#">Home</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Folders<span class="caret"></span></a>
+                <ul  class="dropdown-menu" >
+                    <li th:each="folder: ${folders}"><a th:text="${folder.folderName}" href="#" onclick="loadData(this);"> </a></li>
+                </ul>
+            </li>
+            <li><a href="/newFolder">newFolder</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li> <a th:text="'Welcome '+${user.email}"> </a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> LogOut</a></li>
+            <li><a href="#"><input type="text" id="myInput" onkeyup="myFunction();" class="form-control" placeholder="Search" style="margin-top: -7.5px" /></a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container" style="width: 100%">
+    <table class="table" id="myTable">
+        <thead class="thead-inverse">
+        <tr>
+            <th>Type</th>
+            <th>Exp: Name</th>
+            <th>Exp: Number</th>
+            <th>Course Title</th>
+            <th>Course Code</th>
+            <th>Student Name</th>
+            <th>Student ID</th>
+            <th>Dept</th>
+            <th>Performance Date</th>
+            <th>Submission Date</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="info: ${info}">
+            <td th:text="${info.aorL}"></td>
+            <td th:text="${info.name}"></td>
+            <td th:text="${info.number}" ></td>
+            <td th:text="${info.courseTitle}"></td>
+            <td th:text="${info.courseCode}"></td>
+            <td th:text="${info.studentName}"></td>
+            <td th:text="${info.studentId}"></td>
+            <td th:text="${info.dept}"></td>
+            <td th:text="${info.pDate}"></td>
+            <td th:text="${info.sDate}"></td>
+            <td><a th:href="'getpdf/'+${info.fileName}" target="_blank">Show</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    function loadData(ele){
+        var folderName=ele.text;
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/Ajax?folderName="+folderName,
+            dataType: 'json',
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+                var content='';
+                $.each( data, function( key, value ) {
+                    console.log( value.name );
+
+                    content += '<tr>';
+                    content += '<td>'+value.aorL+'</td>';
+                    content += '<td>'+value.name+'</td>';
+                    content += '<td>'+value.number+'</td>';
+                    content += '<td>'+value.courseTitle+'</td>';
+                    content += '<td>'+value.courseCode+'</td>';
+                    content += '<td>'+value.studentName+'</td>';
+                    content += '<td>'+value.studentId+'</td>';
+                    content += '<td>'+value.dept+'</td>';
+                    content += '<td>'+value.pDate+'</td>';
+                    content += '<td>'+value.sDate+'</td>';
+                    content += '<td><a href="getpdf/'+value.fileName+'" target="_blank">Show</a></td>';
+                    content += '</tr>';
+
+                });
+                $('#myTable tbody').html(content);
+
+            },
+            error: function () {
+                console.log("error");
+
+            }
+        });
+
+    }
+    function myFunction() {
+        var input, filter, table, tr, td, i,j;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+
+
+    }
+    /*]]>*/
+</script>
+<script type="application/javascript" src="css/js/jquery-3.2.1.js"></script>
+</div>
+</body>
+</html>

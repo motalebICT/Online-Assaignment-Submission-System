@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Signup Form</title>
+
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <style>
+        select {
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 287px;
+            border-radius: 3px;
+            padding: 10px 15px;
+            display: block;
+            text-align: center;
+            font-size: 18px;
+            color: white;
+            font-weight: 300;
+        }
+        select option{
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div id="carbonForm">
+
+
+    <form  method="post" enctype="multipart/form-data">
+        <div class="fieldContainer">
+            <h2>Fill the Form</h2>
+            <div class="formRow">
+                <div class="label">
+                    <label>Select Type:</label>
+                </div>
+
+                <select class="select" name="AorL">
+                    <option>Assignment</option>
+                    <option>Lab Report</option>
+                </select>
+
+            </div>
+            <div class="formRow">
+                <div class="label">
+                    <label>Document Name:</label>
+                </div>
+
+                <div class="field">
+                    <input type="text" name="Name"/>
+                </div>
+            </div>
+
+
+
+            <div class="formRow">
+                <div class="label">
+                    <label >Document Number:</label>
+                </div>
+
+                <div class="field">
+                    <input type="number" name="Number" />
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="label">
+                    <label >Course Title:</label>
+                </div>
+
+                <div class="field">
+                    <input type="text" name="CourseTitle"/>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="label">
+                    <label>Course Code:</label>
+                </div>
+
+                <div class="field">
+                    <input type="text" name="CourseCode" />
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="label">
+                    <label >Student Name:</label>
+                </div>
+
+                <div class="field">
+                    <input type="text" name="StudentName"/>
+                </div>
+            </div>
+
+            <div class="formRow">
+                <div class="label">
+                    <label >Student Id:</label>
+                </div>
+
+                <div class="field">
+                    <input type="text" name="StudentId"/>
+                </div>
+            </div>
+
+            <div class="formRow">
+                <div class="label">
+                    <label>Department:</label>
+                </div>
+
+                <div class="field">
+                    <input type="text" name="Dept"/>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="label">
+                    <label>Folder Name:</label>
+                </div>
+
+                <div class="field">
+                    <input type="text" name="folderName"/>
+                </div>
+            </div>
+
+            <div class="formRow">
+                <div class="label">
+                    <label >Performance Date:</label>
+                </div>
+
+                <div class="field">
+                    <input type="date" name="pDate"/>
+                </div>
+            </div>
+
+        </div>
+        <div class="formRow">
+            <div class="field">
+                <input type="file" name="file"/>
+            </div>
+        </div>
+
+    <!-- Closing fieldContainer -->
+
+<div class="submitButton">
+    <input type="submit" id="submit" value="Submit"/>
+</div>
+
+</form>
+</div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="css/js/script.js"></script>
+
+</body>
+</html>
